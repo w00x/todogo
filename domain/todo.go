@@ -27,6 +27,10 @@ func (i Todo) Id() string {
 }
 
 func (i *Todo) Toggle() bool {
+	if i.Completed == nil {
+		i.Completed = new(bool)
+	}
+
 	*i.Completed = !*i.Completed
 	return *i.Completed
 }

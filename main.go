@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	infrastructure.GinRoutes().Run()
+	infrastructure.GinRoutes("memory").Run()
 }

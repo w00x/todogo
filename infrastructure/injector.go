@@ -3,7 +3,7 @@ package infrastructure
 import (
 	"todogohexa/application"
 	"todogohexa/domain"
-	v1 "todogohexa/infrastructure/controller/v1"
+	"todogohexa/infrastructure/api/controller/v1"
 	"todogohexa/infrastructure/factory/repository"
 )
 

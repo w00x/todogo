@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"todogohexa/application"
-	"todogohexa/infrastructure/context"
+	"todogohexa/infrastructure/api/context"
 	"todogohexa/infrastructure/dto"
 )
 
