@@ -6,10 +6,10 @@ type Todo struct {
 	id			string
 	Title 		string
 	Body 		string
-	Completed 	bool
+	Completed 	*bool
 }
 
-func NewTodo(id string, title string, body string, completed bool) *Todo {
+func NewTodo(id string, title string, body string, completed *bool) *Todo {
 	if id == "" {
 		id = uuid.New().String()
 	}
@@ -27,6 +27,6 @@ func (i Todo) Id() string {
 }
 
 func (i *Todo) Toggle() bool {
-	i.Completed = !i.Completed
-	return i.Completed
+	*i.Completed = !*i.Completed
+	return *i.Completed
 }

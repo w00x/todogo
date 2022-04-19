@@ -6,10 +6,10 @@ type TodoDto struct {
 	Id			string	`json:"id" uri:"id"`
 	Title 		string	`json:"title"`
 	Body 		string	`json:"body"`
-	Completed 	bool	`json:"completed"`
+	Completed 	*bool	`json:"completed"`
 }
 
-func NewTodoDto(id string, title string, body string, completed bool) *TodoDto {
+func NewTodoDto(id string, title string, body string, completed *bool) *TodoDto {
 	return &TodoDto{id, title, body, completed}
 }
 
