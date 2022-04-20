@@ -17,8 +17,8 @@ func NewTodoController(todoApplication *application.TodoApplication) *TodoContro
 }
 
 func (todoController *TodoController) Index(c context.IContextAdapter) {
-	inventories, _ := todoController.todoApplication.All()
-	c.JSON(http.StatusOK, dto.NewTodoListDtoFromDomains(inventories))
+	todos, _ := todoController.todoApplication.All()
+	c.JSON(http.StatusOK, dto.NewTodoListDtoFromDomains(todos))
 }
 
 func (todoController *TodoController) Get(c context.IContextAdapter) {
