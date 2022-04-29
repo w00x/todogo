@@ -1,8 +1,8 @@
 package memory
 
 import (
-	"todogohexa/domain"
-	"todogohexa/infrastructure/errors"
+	"todogo/domain"
+	"todogo/infrastructure/errors"
 )
 
 type TodoRepository struct {
@@ -11,18 +11,22 @@ type TodoRepository struct {
 
 func (i *TodoRepository) All() (*[]domain.Todo, errors.IBaseError) {
 	var todos []domain.Todo
-	for _, value := range *i.Todos {
+	for _, value := range *TodoMemoryFactory() {
 		todos = append(todos, *value)
 	}
 	return &todos, nil
 }
 
 func (i *TodoRepository) FindById(id string) (*domain.Todo, errors.IBaseError) {
-	return (*i.Todos)[id], nil
+	todo := (*TodoMemoryFactory())[id]
+	if todo == nil {
+		return nil, errors.NewNotFoundError("Repository not found")
+	}
+	return todo, nil
 }
 
 func (i *TodoRepository) Update(todo *domain.Todo) (*domain.Todo, errors.IBaseError) {
-	newTodo := (*i.Todos)[todo.Id()]
+	newTodo := (*TodoMemoryFactory())[todo.Id()]
 
 	if todo.Title != "" {
 		newTodo.Title = todo.Title
@@ -36,16 +40,27 @@ func (i *TodoRepository) Update(todo *domain.Todo) (*domain.Todo, errors.IBaseEr
 		newTodo.Completed = todo.Completed
 	}
 
-	(*i.Todos)[todo.Id()] = newTodo
+	(*TodoMemoryFactory())[todo.Id()] = newTodo
 	return newTodo, nil
 }
 
 func (i *TodoRepository) Create(todo *domain.Todo) (*domain.Todo, errors.IBaseError) {
-	(*i.Todos)[todo.Id()] = todo
+	(*TodoMemoryFactory())[todo.Id()] = todo
 	return todo, nil
 }
 
 func (i *TodoRepository) Destroy(todo *domain.Todo) errors.IBaseError {
-	delete(*i.Todos, todo.Id())
+	delete(*TodoMemoryFactory(), todo.Id())
 	return nil
+}
+
+var todos map[string]*domain.Todo
+
+func TodoMemoryFactory() *map[string]*domain.Todo {
+	if todos != nil {
+		return &todos
+	}
+
+	todos = make(map[string]*domain.Todo)
+	return &todos
 }

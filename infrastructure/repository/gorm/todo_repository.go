@@ -2,10 +2,10 @@ package gorm
 
 import (
 	"gorm.io/gorm"
-	"todogohexa/domain"
-	"todogohexa/infrastructure/errors"
-	"todogohexa/infrastructure/repository/gorm/mappers"
-	"todogohexa/infrastructure/repository/gorm/models"
+	"todogo/domain"
+	"todogo/infrastructure/errors"
+	"todogo/infrastructure/repository/gorm/mappers"
+	"todogo/infrastructure/repository/gorm/models"
 )
 
 type TodoRepository struct {

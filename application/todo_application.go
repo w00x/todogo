@@ -1,9 +1,9 @@
 package application
 
 import (
-	"todogohexa/domain"
-	"todogohexa/domain/repository"
-	"todogohexa/infrastructure/errors"
+	"todogo/domain"
+	"todogo/domain/repository"
+	"todogo/infrastructure/errors"
 )
 
 type TodoApplication struct {

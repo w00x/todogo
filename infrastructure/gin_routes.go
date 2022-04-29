@@ -2,12 +2,10 @@ package infrastructure
 
 import (
 	"github.com/gin-gonic/gin"
-	"todogohexa/domain"
-	"todogohexa/infrastructure/factory"
+	"todogo/infrastructure/factory"
 )
 
 func GinRoutes(factoryAdapter string) *gin.Engine {
-	todos := make(map[string]*domain.Todo)
 	route := gin.Default()
 	contextAdapter := "gin"
 
@@ -15,7 +13,7 @@ func GinRoutes(factoryAdapter string) *gin.Engine {
 	{
 		todo := version1.Group("todo")
 		{
-			todoController := InitializeTodoController(factoryAdapter, todos)
+			todoController := InitializeTodoController(factoryAdapter)
 			todo.GET("", func(context *gin.Context) {
 				ctx, err := factory.ContextFactory(contextAdapter, context)
 				if err != nil {

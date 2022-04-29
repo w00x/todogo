@@ -1,14 +1,13 @@
 package infrastructure
 
 import (
-	"todogohexa/application"
-	"todogohexa/domain"
-	"todogohexa/infrastructure/api/controller/v1"
-	"todogohexa/infrastructure/factory/repository"
+	"todogo/application"
+	"todogo/infrastructure/api/controller/v1"
+	"todogo/infrastructure/factory/repository"
 )
 
-func InitializeTodoController(factoryAdapter string, todos map[string]*domain.Todo) *v1.TodoController {
-	factory, err := repository.TodoFactory(factoryAdapter, &todos)
+func InitializeTodoController(factoryAdapter string) *v1.TodoController {
+	factory, err := repository.TodoFactory(factoryAdapter)
 	if err != nil {
 		panic(err)
 	}

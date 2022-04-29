@@ -1,8 +1,8 @@
 package mappers
 
 import (
-	"todogohexa/domain"
-	"todogohexa/infrastructure/repository/gorm/models"
+	"todogo/domain"
+	"todogo/infrastructure/repository/gorm/models"
 )
 
 func FromTodoDomainToModel(i *domain.Todo) *models.Todo {

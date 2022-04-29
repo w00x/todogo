@@ -2,8 +2,8 @@ package factory
 
 import (
 	"github.com/gin-gonic/gin"
-	context2 "todogohexa/infrastructure/api/context"
-	"todogohexa/infrastructure/errors"
+	context2 "todogo/infrastructure/api/context"
+	"todogo/infrastructure/errors"
 )
 
 func ContextFactory(adapter string, ctx interface{}) (context2.IContextAdapter, errors.IBaseError) {

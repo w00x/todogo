@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"todogohexa/domain"
-	"todogohexa/infrastructure/errors"
+	"todogo/domain"
+	"todogo/infrastructure/errors"
 )
 
 type ITodoRepository interface {

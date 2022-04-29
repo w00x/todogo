@@ -2,16 +2,23 @@
 
 DIR="db/migrations"
 NAME_CREATE_MIGRATION=$2
+
 CREATE_CMD="migrate create -ext sql -dir ${DIR} -seq ${NAME_CREATE_MIGRATION}"
+
 RUN_MIGRATION_CMD="migrate -database ${DBMIGRATION_URL} -path ${DIR} up"
 RUN_DESTROY_CMD="migrate -database ${DBMIGRATION_URL} -path ${DIR} down"
+
+RUN_MIGRATION_TEST_CMD="migrate -database ${DBMIGRATION_TEST_URL} -path ${DIR} up"
+RUN_DESTROY_TEST_CMD="migrate -database ${DBMIGRATION_TEST_URL} -path ${DIR} down"
 
 if [ "$1" = "create" ]; then
   eval $CREATE_CMD
 elif [ "$1" = "up" ]; then
   eval $RUN_MIGRATION_CMD
+  eval $RUN_MIGRATION_TEST_CMD
 elif [ "$1" = "down" ]; then
   eval $RUN_DESTROY_CMD
+  eval $RUN_DESTROY_TEST_CMD
 else
   echo "For create a migration run: ./migrator create [MIGRATION_NAME]"
   echo "For destroy migrations run: ./migrator down"

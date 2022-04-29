@@ -1,9 +1,9 @@
 package main
 
 import (
-	"todogohexa/infrastructure"
+	"todogo/infrastructure"
 )
 
 func main() {
-	infrastructure.GinRoutes("memory").Run()
+	infrastructure.GinRoutes("gorm").Run()
 }

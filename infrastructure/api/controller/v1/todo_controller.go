@@ -3,9 +3,9 @@ package v1
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"todogohexa/application"
-	"todogohexa/infrastructure/api/context"
-	"todogohexa/infrastructure/dto"
+	"todogo/application"
+	"todogo/infrastructure/api/context"
+	"todogo/infrastructure/dto"
 )
 
 type TodoController struct {

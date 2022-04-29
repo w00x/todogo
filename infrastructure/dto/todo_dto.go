@@ -1,6 +1,6 @@
 package dto
 
-import "todogohexa/domain"
+import "todogo/domain"
 
 type TodoDto struct {
 	Id			string	`json:"id" uri:"id"`
