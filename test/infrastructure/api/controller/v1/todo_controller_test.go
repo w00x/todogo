@@ -53,7 +53,10 @@ func TestTodoController_Create(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	resp, _ := http.Post(fmt.Sprintf("%s/v1/todo", server.URL), "application/json", bytes.NewBuffer(jsonData))
+	resp, _ := http.Post(
+		fmt.Sprintf("%s/v1/todo", server.URL), "application/json",
+		bytes.NewBuffer(jsonData),
+	)
 
 	assert.Equal(t, http.StatusCreated, resp.StatusCode)
 
@@ -75,7 +78,9 @@ func TestTodoController_Delete(t *testing.T) {
 	todo := factories.NewTodoFactory()
 	router := infrastructure.GinRoutes(test.GetCurrentAdapter())
 	server := httptest.NewServer(router)
-	req, _ := http.NewRequest(http.MethodDelete, fmt.Sprintf("%s/v1/todo/%s", server.URL, todo.Id()), nil)
+	req, _ := http.NewRequest(
+		http.MethodDelete, fmt.Sprintf("%s/v1/todo/%s", server.URL, todo.Id()), nil,
+	)
 	client := &http.Client{}
 	resp, _ := client.Do(req)
 	assert.Equal(t, http.StatusNoContent, resp.StatusCode)
@@ -145,7 +150,10 @@ func TestTodoController_Update(t *testing.T) {
 	values := factories.NewTodoObjectFactory()
 	jsonData, _ := json.Marshal(values)
 
-	req, _ := http.NewRequest(http.MethodPatch, fmt.Sprintf("%s/v1/todo/%s", server.URL, todo.Id()), bytes.NewBuffer(jsonData))
+	req, _ := http.NewRequest(
+		http.MethodPatch, fmt.Sprintf("%s/v1/todo/%s", server.URL, todo.Id()),
+		bytes.NewBuffer(jsonData),
+	)
 	client := &http.Client{}
 	resp, _ := client.Do(req)
 
