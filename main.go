@@ -2,8 +2,9 @@ package main
 
 import (
 	"todogo/infrastructure"
+	"todogo/infrastructure/repository"
 )
 
 func main() {
-	infrastructure.GinRoutes("gorm").Run()
+	infrastructure.GinRoutes(repository.GORM).Run()
 }
