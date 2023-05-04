@@ -3,6 +3,7 @@ package mappers
 import (
 	"todogo/domain"
 	"todogo/infrastructure/repository/gorm/models"
+	"todogo/shared"
 )
 
 func FromTodoDomainToModel(i *domain.Todo) *models.Todo {
@@ -10,7 +11,7 @@ func FromTodoDomainToModel(i *domain.Todo) *models.Todo {
 }
 
 func FromTodoModelToDomain(i *models.Todo) *domain.Todo {
-	return domain.NewTodo(i.ID, i.Title, i.Body, i.Completed)
+	return domain.NewTodo(i.ID, i.Title, i.Body, i.Completed, shared.TimeToDateTime(i.CreatedAt))
 }
 
 func NewTodoListDomainFromModel(todos *[]models.Todo) *[]domain.Todo {

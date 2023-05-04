@@ -1,15 +1,19 @@
 package domain
 
-import "github.com/google/uuid"
+import (
+	"github.com/google/uuid"
+	"todogo/shared"
+)
 
 type Todo struct {
-	id			string
-	Title 		string
-	Body 		string
-	Completed 	*bool
+	id        string
+	Title     string
+	Body      string
+	Completed *bool
+	CreatedAt shared.DateTime
 }
 
-func NewTodo(id string, title string, body string, completed *bool) *Todo {
+func NewTodo(id string, title string, body string, completed *bool, createdAt shared.DateTime) *Todo {
 	if id == "" {
 		id = uuid.New().String()
 	}
@@ -19,6 +23,7 @@ func NewTodo(id string, title string, body string, completed *bool) *Todo {
 		Title:     title,
 		Body:      body,
 		Completed: completed,
+		CreatedAt: createdAt,
 	}
 }
 

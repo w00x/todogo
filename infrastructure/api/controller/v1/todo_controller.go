@@ -18,7 +18,12 @@ func NewTodoController(todoApplication *application.TodoApplication) *TodoContro
 
 func (todoController *TodoController) Index(c context.IContextAdapter) {
 	todos, _ := todoController.todoApplication.All()
-	c.JSON(http.StatusOK, dto.NewTodoListDtoFromDomains(todos))
+	response := dto.NewTodoListDtoFromDomains(todos)
+	if response != nil {
+		c.JSON(http.StatusOK, response)
+	} else {
+		c.JSON(http.StatusOK, []string{})
+	}
 }
 
 func (todoController *TodoController) Get(c context.IContextAdapter) {
@@ -36,12 +41,12 @@ func (todoController *TodoController) Get(c context.IContextAdapter) {
 func (todoController *TodoController) Create(c context.IContextAdapter) {
 	var todoDto dto.TodoDto
 	if err := c.ShouldBindJSON(&todoDto); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{ "error": err.Error() })
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	todo, err := todoController.todoApplication.Create(todoDto.ToDomain())
 	if err != nil {
-		c.JSON(err.HttpStatusCode(), gin.H{ "error": err.Error() })
+		c.JSON(err.HttpStatusCode(), gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusCreated, dto.NewTodoDtoFromDomain(todo))
@@ -55,7 +60,7 @@ func (todoController *TodoController) Update(c context.IContextAdapter) {
 	}
 
 	if err := c.ShouldBindJSON(&todoDto); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{ "error": err.Error() })
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	todo, err := todoController.todoApplication.Update(todoDto.ToDomain())

@@ -7,10 +7,10 @@ import (
 )
 
 func InitializeTodoController(factoryAdapter string) *v1.TodoController {
-	factory, err := repository.TodoFactory(factoryAdapter)
+	repository, err := repository.TodoFactory(factoryAdapter)
 	if err != nil {
 		panic(err)
 	}
-	application := application.NewTodoApplication(factory)
+	application := application.NewTodoApplication(repository)
 	return v1.NewTodoController(application)
 }

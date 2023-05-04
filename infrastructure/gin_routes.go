@@ -14,7 +14,7 @@ func GinRoutes(factoryAdapter string) *gin.Engine {
 		todo := version1.Group("todo")
 		{
 			todoController := InitializeTodoController(factoryAdapter)
-			todo.GET("", func(context *gin.Context) {
+			todo.GET("/", func(context *gin.Context) {
 				ctx, err := factory.ContextFactory(contextAdapter, context)
 				if err != nil {
 					panic(err)
