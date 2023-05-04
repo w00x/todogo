@@ -5,6 +5,7 @@ import (
 	"github.com/brianvoe/gofakeit/v6"
 	"todogo/domain"
 	"todogo/infrastructure/repository/gorm"
+	"todogo/shared"
 )
 
 type Todo struct {
@@ -12,10 +13,11 @@ type Todo struct {
 	Title     string
 	Body      string
 	Completed *bool
+	CreatedAt shared.DateTime
 }
 
 func (i Todo) ToDomain() *domain.Todo {
-	return domain.NewTodo(i.id, i.Title, i.Body, i.Completed)
+	return domain.NewTodo(i.id, i.Title, i.Body, i.Completed, i.CreatedAt)
 }
 
 func NewTodo() (*Todo, error) {

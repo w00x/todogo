@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"testing"
 	"todogo/domain"
+	"todogo/shared"
 	"todogo/test/factories"
 )
 
@@ -13,12 +14,14 @@ func TestNewTodo(t *testing.T) {
 	title := gofakeit.LoremIpsumWord()
 	body := gofakeit.LoremIpsumSentence(500)
 	completed := gofakeit.Bool()
+	createdAt := gofakeit.Date()
 
-	todo := domain.NewTodo("", title, body, &completed)
+	todo := domain.NewTodo("", title, body, &completed, shared.TimeToDateTime(createdAt))
 
 	assert.Equal(t, todo.Title, title)
 	assert.Equal(t, todo.Body, body)
 	assert.Equal(t, *todo.Completed, completed)
+	assert.Equal(t, todo.CreatedAt, createdAt)
 	assert.NotNil(t, todo.Id())
 	assert.Regexp(t, "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", todo.Id())
 }
