@@ -47,3 +47,4 @@ dump.rdb
 # RubyMine
 .idea
 .env
+main
